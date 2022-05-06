@@ -3,12 +3,12 @@ pipeline {
         agent any
         stage('build') {
             steps {
-                bat 'echo python --version'
+                bat "echo hello from build"
             }
         }
         stage('test'){
             steps{
-                bat 'echo hello from jenkins'
+                bat "echo hello from test"
             }
         }
     }
