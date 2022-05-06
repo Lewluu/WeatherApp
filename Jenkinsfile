@@ -6,5 +6,10 @@ pipeline {
                 bat 'echo python --version'
             }
         }
+        stage('test'){
+            steps{
+                bat 'echo hello from jenkins'
+            }
+        }
     }
 }
