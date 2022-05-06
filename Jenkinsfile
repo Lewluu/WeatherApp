@@ -3,7 +3,7 @@ pipeline {
         agent any
         stage('build') {
             steps {
-                bat 'python --version'
+                bat 'echo python --version'
             }
         }
     }
