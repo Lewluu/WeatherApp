@@ -1,9 +1,5 @@
 from urllib import response
 import requests
-import os
-import json
-
-print(os.getcwd())
 
 api_key="90b3486670d48a81220917bdefd43c68"
 base_url="http://api.openweathermap.org/data/2.5/weather?"
