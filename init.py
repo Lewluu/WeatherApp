@@ -22,6 +22,7 @@ if x["cod"] != "404":
     z=x["weather"]
     weather_desc=z[0]["description"]
 
+    print("Showing weather data for "+city_name+":")
     print("Temperature (in kelvin) = "+str(curr_temp))
     print("Pressure (in hpa) = "+str(curr_pres))
     print("Humidity (in percentage) = "+str(curr_hum))
