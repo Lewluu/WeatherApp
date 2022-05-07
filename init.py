@@ -1,11 +1,16 @@
 from urllib import response
 import requests
+import yaml
 
 api_key="90b3486670d48a81220917bdefd43c68"
 base_url="http://api.openweathermap.org/data/2.5/weather?"
 
 # city_name=input("Enter city name: ")
-city_name="Kuala Lumpur"
+
+with open('data_info.yaml','r') as file:
+    data=yaml.safe_load(file);
+
+city_name=data['weather-app']['city']
 
 complete_url=base_url+"appid="+api_key+"&q="+city_name
 
