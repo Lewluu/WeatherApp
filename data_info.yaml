@@ -1,4 +1,4 @@
 %YAML 1.2
 ---
 weather-app:
-  city: Cluj-Napoca
+  city: [Cluj-Napoca, Botosani, Iasi]

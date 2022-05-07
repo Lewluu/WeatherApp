@@ -10,7 +10,7 @@ base_url="http://api.openweathermap.org/data/2.5/weather?"
 with open('data_info.yaml','r') as file:
     data=yaml.safe_load(file);
 
-city_name=data['weather-app']['city']
+city_name=data['weather-app']['city'][1]
 
 complete_url=base_url+"appid="+api_key+"&q="+city_name
 
