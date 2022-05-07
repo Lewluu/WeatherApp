@@ -1,6 +1,9 @@
 pipeline {
+
     stages {
+        
         agent any
+
         stage('build') {
             steps {
                 bat "echo hello from build"
