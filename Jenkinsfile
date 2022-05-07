@@ -1,17 +1,22 @@
 pipeline {
+    agent any
 
     stages {
-        
-        agent any
-
-        stage('build') {
-            steps {
-                bat "echo hello from build"
+        stage('Checkout'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[credentialsId: 'c5c6e9f0-7347-4d1b-8d3f-a61a4108a80b', url: 'https://github.com/Lewluu/WeatherApp.git']]])
             }
         }
-        stage('test'){
+        stage('Build') {
+            steps {
+                git branch: 'dev', credentialsId: 'c5c6e9f0-7347-4d1b-8d3f-a61a4108a80b', url: 'https://github.com/Lewluu/WeatherApp.git'
+                bat 'pip install requests'
+                bat 'python init.py'
+            }
+        }
+        stage('Test'){
             steps{
-                bat "echo hello from test"
+                echo 'The job was tested'
             }
         }
     }
