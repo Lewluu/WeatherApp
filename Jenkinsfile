@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building dev-producer branch '
+                echo 'Building dev-consumer branch '
             }
         }
         stage('Test'){
             steps{
-                echo 'Testing dev-producer branch'
+                echo 'Testing dev-consumer branch'
             }
         }
     }
