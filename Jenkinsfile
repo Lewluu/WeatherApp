@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building dev-consumer branch '
+                bat 'python init.py'
             }
         }
         stage('Test'){
