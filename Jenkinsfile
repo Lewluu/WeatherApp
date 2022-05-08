@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building dev-producer branch '
+                bat 'python init.py'
             }
             post {
                 success {
