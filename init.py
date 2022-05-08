@@ -1,16 +1,21 @@
 from urllib import response
 import requests
-import yaml
+import os
+try:
+    import yaml
+except:
+    print("Module yaml doesn't exist. Importing ...")
+    os.system("pip install pyyaml")
 
 api_key="90b3486670d48a81220917bdefd43c68"
 base_url="http://api.openweathermap.org/data/2.5/weather?"
 
 # city_name=input("Enter city name: ")
 
-with open('data_info.yaml','r') as file:
+with open('data_in.yaml','r') as file:
     data=yaml.safe_load(file);
 
-city_name=data['weather-app']['city'][1]
+city_name=data['city'][0]
 
 complete_url=base_url+"appid="+api_key+"&q="+city_name
 
@@ -26,10 +31,12 @@ if x["cod"] != "404":
     z=x["weather"]
     weather_desc=z[0]["description"]
 
-    print("Showing weather data for "+city_name+":")
-    print("Temperature (in kelvin) = "+str(curr_temp))
-    print("Pressure (in hpa) = "+str(curr_pres))
-    print("Humidity (in percentage) = "+str(curr_hum))
-    print("Description = "+str(weather_desc))
+    out_yaml=[{'city':[city_name]},
+            {'temperature':[str(curr_temp)]},
+            {'pressure':[str(curr_pres)]},
+            {'humidity':[str(curr_hum)]},
+            {'description':[str(weather_desc)]}]
+    with open('data_out.yaml','w') as file:
+        yaml.dump(out_yaml,file)
 else:
     print("City not found!")
