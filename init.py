@@ -1,5 +1,27 @@
+from asyncio.windows_events import NULL
+import errno
 import os
+import threading
 
-os.system("py server.py")
-os.system("ping 127.0.0.1")
-os.system("py client.py")
+def start_server(name):
+    print("Starting server ....")
+    os.system("py server.py")
+
+def start_client(name):
+    print("Starting client ....")
+    os.system("py client.py")
+
+t1=threading.Thread(target=start_server,args={"My Server"})
+t2=threading.Thread(target=start_client,args={"My Client"})
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print("End of program...")
+
+# os.system("py server.py")
+# os.system("ping 127.0.0.1")
+# os.system("py client.py")
