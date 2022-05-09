@@ -5,11 +5,11 @@ import threading
 
 def start_server(name):
     print("Starting server ....")
-    os.system("py server.py")
+    os.system("python server.py")
 
 def start_client(name):
     print("Starting client ....")
-    os.system("py client.py")
+    os.system("python client.py")
 
 t1=threading.Thread(target=start_server,args={"My Server"})
 t2=threading.Thread(target=start_client,args={"My Client"})
