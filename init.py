@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-import errno
 import os
 import threading
 
