@@ -11,7 +11,7 @@ except:
     file=open('data_out.yaml')
     data=yaml.safe_load(file)
 
-print(os.path.getmtime(path))
+print(os.path.getmtime(path)/3600)
 
 curr_temp=float(str(data[1]['temperature']).replace("['","").replace("']",""))
 last_hour_temp=0
