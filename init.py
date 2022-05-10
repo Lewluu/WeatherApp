@@ -9,7 +9,7 @@ except:
     file=open('data_out.yaml')
     data=yaml.safe_load(file)
 
-print(os.path.getmtime(file)/3600)
+print(os.path.getmtime(file))
 
 curr_temp=float(str(data[1]['temperature']).replace("['","").replace("']",""))
 last_hour_temp=0
