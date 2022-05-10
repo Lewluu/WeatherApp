@@ -8,10 +8,7 @@ PORT = 65432
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    # s.sendall(b"Hello, world")
-
     producer.initWeatherData()
-    # data=pickle.dumps(consumer.getWeatherInfo())
     data=consumer.getWeatherInfo()
     for info in data:
         info=json.dumps(info)
