@@ -1,6 +1,7 @@
 import yaml
 
 import os
+import time
 
 path='../python-job1_dev-producer/data_out.yaml'
 
@@ -11,7 +12,7 @@ except:
     file=open('data_out.yaml')
     data=yaml.safe_load(file)
 
-print(os.path.getmtime(path)/3600)
+last_modification=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(path)))
 
 curr_temp=float(str(data[1]['temperature']).replace("['","").replace("']",""))
 last_hour_temp=0
