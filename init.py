@@ -32,7 +32,7 @@ if x["cod"] != "404":
     weather_desc=z[0]["description"]
 
     out_yaml=[{'city':[city_name]},
-            {'temperature':[str(curr_temp)]},
+            {'temperature':[str(round(curr_temp-273.15,3))]},
             {'pressure':[str(curr_pres)]},
             {'humidity':[str(curr_hum)]},
             {'description':[str(weather_desc)]}]
