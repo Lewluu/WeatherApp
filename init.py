@@ -7,4 +7,6 @@ except:
     with open('data_out.yaml') as file:
         data=yaml.safe_load(file)
 
-print(data)
+curr_temp=float(str(data[1]['temperature']).replace("['","").replace("']",""))
+
+print(curr_temp)
