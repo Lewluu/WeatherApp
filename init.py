@@ -12,6 +12,7 @@ except:
     file=open('data_out.yaml')
     data=yaml.safe_load(file)
 
+#need to replace this modification value with a value stored in the server
 last_modification=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(path)))
 print(last_modification)
 
