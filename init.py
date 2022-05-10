@@ -1,3 +1,4 @@
+from cmath import e
 from urllib import response
 import requests
 import os
@@ -38,5 +39,12 @@ if x["cod"] != "404":
             {'description':[str(weather_desc)]}]
     with open('data_out.yaml','w') as file:
         yaml.dump(out_yaml,file)
+
+    try:
+        with open("../data/temperature_"+city_name+".txt","a+") as file:
+            file.write(str(round(curr_temp-273.15,3))+"\n")
+            file.close()
+    except:
+        print("Error opening the file temperature_"+city_name)
 else:
     print("City not found!")
