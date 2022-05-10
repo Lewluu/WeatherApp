@@ -1,7 +1,7 @@
 import yaml
 
 try:
-    file=open('./python-job1_dev-producer/data_out.yaml')
+    file=open('../python-job1_dev-producer/data_out.yaml')
     data=yaml.safe_load(file)
 except:
     file=open('data_out.yaml')
