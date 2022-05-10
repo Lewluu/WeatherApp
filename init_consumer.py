@@ -1,5 +1,3 @@
-from copyreg import pickle
-import json
 import yaml
 
 def getWeatherInfo():
