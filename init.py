@@ -13,6 +13,7 @@ except:
     data=yaml.safe_load(file)
 
 last_modification=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(path)))
+print(last_modification)
 
 curr_temp=float(str(data[1]['temperature']).replace("['","").replace("']",""))
 last_hour_temp=0
