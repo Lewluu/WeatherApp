@@ -1,6 +1,6 @@
 from urllib import response
 import requests
-import os
+import os, shutil
 from datetime import datetime
 try:
     import yaml
@@ -38,6 +38,8 @@ if x["cod"] != "404":
             {'description':[str(weather_desc)]}]
     with open('data_out.yaml','w') as file:
         yaml.dump(out_yaml,file)
+        file.close()
+        shutil.move('data_out.yaml','../data/data_out.yaml')
 
     try:
         with open("../data/temperature_"+city_name+".txt","a+") as file:
