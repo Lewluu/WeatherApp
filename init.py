@@ -1,7 +1,7 @@
-from cmath import e
 from urllib import response
 import requests
 import os
+from datetime import datetime
 try:
     import yaml
 except:
@@ -27,13 +27,14 @@ x=response.json()
 if x["cod"] != "404":
     y=x["main"]
     curr_temp=y["temp"]
+    curr_temp=round(curr_temp-273.15,3)
     curr_pres=y["pressure"]
     curr_hum=y["humidity"]
     z=x["weather"]
     weather_desc=z[0]["description"]
 
     out_yaml=[{'city':[city_name]},
-            {'temperature':[str(round(curr_temp-273.15,3))]},
+            {'temperature':[str(curr_temp)]},
             {'pressure':[str(curr_pres)]},
             {'humidity':[str(curr_hum)]},
             {'description':[str(weather_desc)]}]
@@ -42,9 +43,13 @@ if x["cod"] != "404":
 
     try:
         with open("../data/temperature_"+city_name+".txt","a+") as file:
-            file.write(str(round(curr_temp-273.15,3))+"\n")
+            data_dict=dict()
+            data_dict["temperature"]=curr_temp
+            data_dict["date"]=datetime.now().strftime("%d/%m/%y")
+            data_dict["time"]=datetime.now().strftime("%H:%M:%S")
+            file.write(str(data_dict)+"\n")
             file.close()
-    except:
-        print("Error opening the file temperature_"+city_name)
+    except Exception as e:
+        print("Error "+str(e))
 else:
     print("City not found!")
