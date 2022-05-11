@@ -2,25 +2,32 @@ import yaml
 
 import os
 import time
+import ast
 
-path='../python-job1_dev-producer/data_out.yaml'
+threshold_temp=10.0
+path='../data/data_out.yaml'
 
 try:
     file=open(path)
     data=yaml.safe_load(file)
-except:
-    file=open('data_out.yaml')
-    data=yaml.safe_load(file)
+except Exception as e:
+    print("Error: "+str(e))
 
-#need to replace this modification value with a value stored in the server
-last_modification=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(path)))
-print(last_modification)
+city=str(data[0]['city']).replace("['","").replace("']","")
+new_path="../data/temperature_"+city+".txt"
 
-curr_temp=float(str(data[1]['temperature']).replace("['","").replace("']",""))
-last_hour_temp=0
-threshold_temp=10.0
+try:
+    file=open(new_path)
+except Exception as e:
+    print("Error: "+str(e))
 
-if abs(curr_temp-last_hour_temp)>threshold_temp:
-    print("The temperature has exceeded the threshold... sending notification!")
+for line in file:
+    #converting string to dict and remove the seconds
+    line=str(ast.literal_eval(line)['time'])[:-3]
+    print(line)
 
-print(curr_temp)
+
+# if abs(curr_temp-last_hour_temp)>threshold_temp:
+#     print("The temperature has exceeded the threshold... sending notification!")
+
+# print(curr_temp)
