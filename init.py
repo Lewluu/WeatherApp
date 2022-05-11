@@ -14,6 +14,7 @@ except Exception as e:
     print("Error: "+str(e))
 
 city=str(data[0]['city']).replace("['","").replace("']","")
+curr_temp=float(str(data[1]['temperature']).replace("['","").replace("']",""))
 new_path="../data/temperature_"+city+".txt"
 
 try:
@@ -25,9 +26,19 @@ except Exception as e:
 curr_time=datetime.now().strftime("%H:%M")
 one_hour_ago_time=str(int(curr_time[0:2])-1)+curr_time[2:6]
 
+#getting the temperature from exactly one hour ago
 for line in file:
     #converting string to dict and remove the seconds
-    data_time=str(ast.literal_eval(line)['time'])[:-3]
-    if data_time==one_hour_ago_time:
+    line=ast.literal_eval(line)
+    file_data_time=str(line['time'])[:-3]
+    if file_data_time==one_hour_ago_time:
         print("Found temperature from one hour ago!")
-        pass
+        file_data_temp=float(line['temperature'])
+        diff_temp=abs(round(curr_temp-file_data_temp,2))
+        print("Difference in temperature from one hour ago is: "+str(diff_temp))
+        if diff_temp > threshold_temp:
+            print("Threshold temperature exceeded ... sending mail notification ...")
+        break
+        
+        
+        
