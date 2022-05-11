@@ -1,7 +1,7 @@
 import yaml
 
 import os
-import time
+from datetime import datetime
 import ast
 
 threshold_temp=10.0
@@ -21,13 +21,13 @@ try:
 except Exception as e:
     print("Error: "+str(e))
 
+#getting the time from one hour ago
+curr_time=datetime.now().strftime("%H:%M")
+one_hour_ago_time=str(int(curr_time[0:2])-1)+curr_time[2:6]
+
 for line in file:
     #converting string to dict and remove the seconds
-    line=str(ast.literal_eval(line)['time'])[:-3]
-    print(line)
-
-
-# if abs(curr_temp-last_hour_temp)>threshold_temp:
-#     print("The temperature has exceeded the threshold... sending notification!")
-
-# print(curr_temp)
+    data_time=str(ast.literal_eval(line)['time'])[:-3]
+    if data_time==one_hour_ago_time:
+        print("Found temperature from one hour ago!")
+        pass
