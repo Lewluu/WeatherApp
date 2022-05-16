@@ -2,8 +2,6 @@ import yaml
 from datetime import datetime
 import ast
 
-threshold_temperature = 10.0
-threshold_humidity = 15.0
 path = '../data/data_out.yaml'
 
 try:
@@ -13,7 +11,7 @@ except Exception as e:
     print(e)
     exit()
 
-if 'city' and 'temperature' and 'humidity' in data[0] or data[1] or data[3]:
+if 'city' and 'temperature' and 'humidity' and 'temperature-threshold' and 'humidity-threshold' in (item for item in data):
     city = str(data[0]['city']).replace("['","").replace("']","")
     curr_temperature = float(str(data[1]['temperature']).replace("['","").replace("']",""))
     curr_humidity = float(str(data[3]['humidity']).replace("['","").replace("']",""))
