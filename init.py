@@ -1,13 +1,7 @@
 from urllib import response
 import requests
-import os, shutil
 from datetime import datetime
-try:
-    import yaml
-except:
-    print("Module yaml doesn't exist. Importing ...")
-    os.system("pip install pyyaml")
-    import yaml
+import yaml
 
 try:
     with open('data_in.yaml','r') as file:
@@ -34,28 +28,11 @@ x = response.json()
 
 if x["cod"] != "404":
     y = x["main"]
-    curr_temp = y["temp"]
-    curr_temp = round(curr_temp - 273.15, 3)
-    curr_pres = y["pressure"]
+    curr_temp = round(y["temp"] - 273.15, 3)
     curr_hum = y["humidity"]
     z = x["weather"]
     weather_desc = z[0]["description"]
 
-    out_yaml = [{'city' : [city_name]},
-            {'temperature' : [str(curr_temp)]},
-            {'pressure' : [str(curr_pres)]},
-            {'humidity' : [str(curr_hum)]},
-            {'description' : [str(weather_desc)]},
-            {'temperature-threshold' : [threshold_temperature]},
-            {'humidity-threshold' : [threshold_humidity]}]
-    try:
-        with open('data_out.yaml','w') as file:
-            yaml.dump(out_yaml, file)
-            file.close()
-            shutil.move('data_out.yaml', '../data/data_out.yaml')
-    except Exception as e:
-        print(e)
-        exit()
     try:
         with open("../data/weather_info_" + city_name + ".txt","a+") as file:
             data_dict = dict()
