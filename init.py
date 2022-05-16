@@ -41,11 +41,13 @@ if x["cod"] != "404":
     z = x["weather"]
     weather_desc = z[0]["description"]
 
-    out_yaml = [{'city':[city_name]},
-            {'temperature':[str(curr_temp)]},
-            {'pressure':[str(curr_pres)]},
-            {'humidity':[str(curr_hum)]},
-            {'description':[str(weather_desc)]}]
+    out_yaml = [{'city' : [city_name]},
+            {'temperature' : [str(curr_temp)]},
+            {'pressure' : [str(curr_pres)]},
+            {'humidity' : [str(curr_hum)]},
+            {'description' : [str(weather_desc)]},
+            {'temperature-threshold' : [threshold_temperature]},
+            {'humidity-threshold' : [threshold_humidity]}]
     try:
         with open('data_out.yaml','w') as file:
             yaml.dump(out_yaml, file)
