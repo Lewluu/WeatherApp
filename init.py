@@ -7,18 +7,24 @@ threshold_humidity = 15.0
 path = '../data/data_out.yaml'
 
 try:
-    file = open(path)
-    data = yaml.safe_load(file)
+    with open(path,'r') as file:
+        data = yaml.safe_load(file)
 except Exception as e:
     print(e)
     exit()
 
-city = str(data[0]['city']).replace("['","").replace("']","")
-curr_temp = float(str(data[1]['temperature']).replace("['","").replace("']",""))
-new_path = "../data/weather_info_"+city+".txt"
+if 'city' and 'temperature' and 'humidity' in data[0] or data[1] or data[3]:
+    city = str(data[0]['city']).replace("['","").replace("']","")
+    curr_temperature = float(str(data[1]['temperature']).replace("['","").replace("']",""))
+    curr_humidity = float(str(data[3]['humidity']).replace("['","").replace("']",""))
+else:
+    print("Values not found in dictionary ...")
+    exit()
+
+new_path = "../data/weather_info_" + city + ".txt"
 
 try:
-    file = open(new_path)
+    file = open(new_path,'r')
 except Exception as e:
     print(e)
     exit()
@@ -33,12 +39,21 @@ for line in file:
     line = ast.literal_eval(line)
     file_data_time = str(line['time'])[:-3]
     if file_data_time == one_hour_ago_time:
-        print("Found temperature from one hour ago!")
-        file_data_temp = float(line['temperature'])
-        diff_temp = abs(round(curr_temp - file_data_temp, 2))
-        print("Difference in temperature from one hour ago is: " + str(diff_temp))
-        if diff_temp > threshold_temperature:
+        print("Found data from one hour ago!")
+
+        file_data_temperature = float(line['temperature'])
+        file_data_humidity = float(line['humidity'])
+        diff_temperature = abs(round(curr_temperature - file_data_temperature, 2))
+        diff_humidity = abs(round(curr_humidity - file_data_humidity, 2))
+
+        print("Difference in temperature from one hour ago is: " + str(diff_temperature))
+        if diff_temperature > threshold_temperature:
             print("Threshold temperature exceeded ... sending mail notification ...")
+
+        print("Difference in humidity from one hour ago is: " + str(diff_humidity))
+        if diff_humidity > threshold_humidity:
+            print("Threshold temperature exceeded ... sending mail notification ...")
+
         break
         
         
