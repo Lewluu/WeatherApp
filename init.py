@@ -1,31 +1,17 @@
-import yaml
 from datetime import datetime
 import ast
 
-path = '../data/data_out.yaml'
+city = 'Botosani'
+
+path = "../data/weather_info_" + city + ".txt"
 
 try:
-    with open(path,'r') as file:
-        data = yaml.safe_load(file)
+    file = open(path,'r')
 except Exception as e:
     print(e)
     exit()
 
-if 'city' and 'temperature' and 'humidity' and 'temperature-threshold' and 'humidity-threshold' in (item for item in data):
-    city = str(data[0]['city']).replace("['","").replace("']","")
-    curr_temperature = float(str(data[1]['temperature']).replace("['","").replace("']",""))
-    curr_humidity = float(str(data[3]['humidity']).replace("['","").replace("']",""))
-else:
-    print("Values not found in dictionary ...")
-    exit()
-
-new_path = "../data/weather_info_" + city + ".txt"
-
-try:
-    file = open(new_path,'r')
-except Exception as e:
-    print(e)
-    exit()
+#getting the current temperature and humidity from the last line of the output file
 
 #getting the time from one hour ago
 curr_time = datetime.now().strftime("%H:%M")
