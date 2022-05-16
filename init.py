@@ -16,9 +16,13 @@ except Exception as e:
     print(e)
     exit()
 
-city_name = data['city'][0]
-api_key = data['api-key'][0]
-base_url = data['base-url'][0]
+if 'city' and 'api-key' and 'base-url' in data.values():
+    city_name = data['city'][0]
+    api_key = data['api-key'][0]
+    base_url = data['base-url'][0]
+else:
+    print("Values not found in dictionary ...")
+    exit()
 
 complete_url = base_url + "appid=" + api_key + "&q=" + city_name
 
