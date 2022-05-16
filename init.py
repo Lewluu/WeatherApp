@@ -3,6 +3,7 @@ from datetime import datetime
 import ast
 
 threshold_temperature = 10.0
+threshold_humidity = 15.0
 path = '../data/data_out.yaml'
 
 try:
@@ -14,7 +15,7 @@ except Exception as e:
 
 city = str(data[0]['city']).replace("['","").replace("']","")
 curr_temp = float(str(data[1]['temperature']).replace("['","").replace("']",""))
-new_path = "../data/temperature_"+city+".txt"
+new_path = "../data/weather_info_"+city+".txt"
 
 try:
     file = open(new_path)
