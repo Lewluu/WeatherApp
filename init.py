@@ -11,7 +11,12 @@ except Exception as e:
     print(e)
     exit()
 
-#getting the current temperature and humidity from the last line of the output file
+#getting the current temperature, humidity from the last line of the output file
+print(len(file.readline()))
+for line in file: pass
+line = ast.literal_eval(line)
+curr_temperature = float(line['temperature'])
+curr_humidity = float(line['humidity'])
 
 #getting the time from one hour ago
 curr_time = datetime.now().strftime("%H:%M")
