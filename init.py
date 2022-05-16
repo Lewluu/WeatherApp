@@ -16,10 +16,12 @@ except Exception as e:
     print(e)
     exit()
 
-if 'city' and 'api-key' and 'base-url' in data.values():
+if 'city' and 'api-key' and 'base-url' and 'temperature-threshold' and 'humidity-threshold' in data:
     city_name = data['city'][0]
     api_key = data['api-key'][0]
     base_url = data['base-url'][0]
+    threshold_temperature = data['temperature-threshold'][0]
+    threshold_humidity = data['humidity-threshold'][0]
 else:
     print("Values not found in dictionary ...")
     exit()
@@ -59,6 +61,8 @@ if x["cod"] != "404":
             data_dict["humidity"] = curr_hum
             data_dict["date"] = datetime.now().strftime("%d/%m/%y")
             data_dict["time"] = datetime.now().strftime("%H:%M:%S")
+            data_dict["temperature-threshold"] = threshold_temperature
+            data_dict["humidity-threshold"] = threshold_humidity
             file.write(str(data_dict) + "\n")
             file.close()
     except Exception as e:
