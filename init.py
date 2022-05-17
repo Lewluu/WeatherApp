@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime
+import ast
 import yaml
 
 try:
@@ -30,7 +31,25 @@ if x["cod"] != "404":
     weather_desc = z[0]["description"]
 
     try:
-        with open("../data/weather_info_" + city_name + ".txt","a+") as file:
+        #removing captions from more than one hour ago
+        with open("../data/weather_info_" + city_name + ".txt", "r+") as file:
+            lines = list()
+            curr_day = datetime.now().strftime("%d")
+            curr_time_h = int(datetime.now().strftime("%H"))
+            curr_time_m = int(datetime.now().strftime("%M"))
+            for line in file:
+                line = ast.literal_eval(line)
+                line_day = line['date'][0:2]
+                line_time_h = int(line['time'][:-6])
+                line_time_m = int((line['time'][-5:-3]))
+                if (curr_day in line_day) and ((abs(curr_time_h - line_time_h) == 0) or (abs(curr_time_h - line_time_h) == 1 and line_time_m >= curr_time_m)):
+                    lines.append(line)
+        file.close()
+        
+        with open("../data/weather_info_" + city_name + ".txt","w") as file:
+            for line in lines:
+                file.write(str(line) + "\n")
+
             data_dict = dict()
             data_dict["temperature"] = curr_temp
             data_dict["humidity"] = curr_hum
@@ -39,9 +58,11 @@ if x["cod"] != "404":
             data_dict["temperature-threshold"] = threshold_temperature
             data_dict["humidity-threshold"] = threshold_humidity
             file.write(str(data_dict) + "\n")
+
             file.close()
     except Exception as e:
-        print(e)
+        print(e + " ... creating file")
+        open("../data/weather_info_" + city_name + ".txt","w")
         exit()
 else:
     print("City not found!")
