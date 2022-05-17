@@ -1,4 +1,3 @@
-from urllib import response
 import requests
 from datetime import datetime
 import yaml
@@ -21,10 +20,7 @@ else:
     exit()
 
 complete_url = base_url + "appid=" + api_key + "&q=" + city_name
-
-response = requests.get(complete_url)
-
-x = response.json()
+x = requests.get(complete_url).json()
 
 if x["cod"] != "404":
     y = x["main"]
