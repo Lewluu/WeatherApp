@@ -1,4 +1,10 @@
+temperature-threshold:
+  - 10.0
+humidity-threshold:
+  - 15.0
+api-key:
+  - 90b3486670d48a81220917bdefd43c68
+base-url:
+  - http://api.openweathermap.org/data/2.5/weather?
 city:
   - Botosani
-  - Iasi
-  - Cluj-Napoca
