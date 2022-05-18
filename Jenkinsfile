@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Bulding the application'
-                withEnv(['PYTHONPATH=C:\Users\Iuliu Antoniu\AppData\Local\Programs\Python\Python310']){
+                withEnv(['PYTHONPATH=C:/Users/Iuliu Antoniu/AppData/Local/Programs/Python/Python310']){
                     bat 'py init.py'
                 }
             }
