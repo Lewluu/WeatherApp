@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Bulding the application'
-                bat 'python3 init.py'
+                bat 'python init.py'
             }
         }
         stage('Test'){
