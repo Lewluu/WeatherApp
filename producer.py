@@ -4,9 +4,9 @@ import ast
 import yaml
 
 class Producer:
-    @staticmethod
-    def init(self):
-        self._city_name = ""
+
+    def init():
+        global city_name
 
         try:
             with open('data_in.yaml','r') as file:
@@ -17,7 +17,7 @@ class Producer:
             exit()
 
         if 'city' and 'api-key' and 'base-url' and 'temperature-threshold' and 'humidity-threshold' in data:
-            self._city_name = data['city'][0]
+            city_name = data['city'][0]
             api_key = data['api-key'][0]
             base_url = data['base-url'][0]
             threshold_temperature = data['temperature-threshold'][0]
@@ -26,7 +26,7 @@ class Producer:
             print("Values not found in dictionary ...")
             exit()
 
-        complete_url = base_url + "appid=" + api_key + "&q=" + self._city_name
+        complete_url = base_url + "appid=" + api_key + "&q=" + city_name
         x = requests.get(complete_url).json()
 
         if x["cod"] != "404":
@@ -36,7 +36,7 @@ class Producer:
 
             try:
                 #removing captions from more than one hour ago
-                with open("../data/weather_info_" + self._city_name + ".txt", "r+") as file:
+                with open("../data/weather_info_" + city_name + ".txt", "r+") as file:
                     lines = list()
                     curr_day = datetime.now().strftime("%d")
                     curr_time_h = int(datetime.now().strftime("%H"))
@@ -50,7 +50,7 @@ class Producer:
                             lines.append(line)
                     file.close()
         
-                with open("../data/weather_info_" + self._city_name + ".txt","w") as file:
+                with open("../data/weather_info_" + city_name + ".txt","w") as file:
                     for line in lines:
                         file.write(str(line) + "\n")
 
@@ -67,13 +67,13 @@ class Producer:
 
             except Exception as e:
                 print(str(e))
-                file = open("../data/weather_info_" + self._city_name + ".txt","w")
+                file = open("../data/weather_info_" + city_name + ".txt","w")
                 file.close()
                 exit()
         else:
             print("City not found!")
-    
-    @staticmethod
-    def getCity(self):
-        return self._city_name
+
+    def getCity():
+        return city_name
+
         
