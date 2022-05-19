@@ -1,33 +1,18 @@
-from src.producer import Producer
+# from mail import Mail
+from src import Producer, Mail
 import os
-import smtplib
 
 Producer.init()
 
-os.system("python packages/consumer.py " + Producer.getCity())
+os.system("python src/consumer.py " + Producer.getCity())
 
-gmail_user = 'pia.generic@gmail.com'
-gmail_password = 'piageneric99'
+Mail.init()
+# Mail.addContent("First line of content ...")
+# Mail.addContent("Second line of content ...")
+# Mail.addContent("Third line of content ...")
 
-sent_from = gmail_user
-to = ['iuliuantoniu@gmail.com']
-subject = 'Lorem ipsum dolor sit amet'
-body = 'consectetur adipiscing elit'
+if Mail.isNotEmpty():
+    Mail.send()
+else:
+    print("Mail is empty!")
 
-email_text = """\
-From: %s
-To: %s
-Subject: %s
-
-%s
-""" % (sent_from, ", ".join(to), subject, body)
-
-try:
-    smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    smtp_server.ehlo()
-    smtp_server.login(gmail_user, gmail_password)
-    smtp_server.sendmail(sent_from, to, email_text)
-    smtp_server.close()
-    print ("Email sent successfully!")
-except Exception as ex:
-    print ("Something went wrong….",ex)

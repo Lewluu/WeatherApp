@@ -4,12 +4,11 @@ import ast
 import yaml
 
 class Producer:
-
     def init():
         global city_name
 
         try:
-            with open('data_in.yaml','r') as file:
+            with open('src/data_in.yaml','r') as file:
                 data = yaml.safe_load(file)
                 file.close()
         except Exception as e:
