@@ -1,10 +1,10 @@
-from producer import Producer
+from packages.producer import Producer
 import os
 import smtplib
 
 Producer.init()
 
-os.system("python consumer.py " + Producer.getCity())
+os.system("python packages/consumer.py " + Producer.getCity())
 
 gmail_user = 'pia.generic@gmail.com'
 gmail_password = 'piageneric99'
