@@ -1,4 +1,4 @@
-from modules.producer import Producer
+from src.producer import Producer
 import os
 import smtplib
 
