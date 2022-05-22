@@ -8,3 +8,9 @@ base-url:
   - http://api.openweathermap.org/data/2.5/weather?
 city:
   - Botosani
+mail-sender:
+  - pia.generic@gmail.com
+mail-password:
+  - piageneric99
+mail-receiver:
+  - iuliuantoniu@gmail.com

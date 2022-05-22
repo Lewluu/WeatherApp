@@ -5,7 +5,8 @@ import yaml
 
 class Producer:
     def init():
-        global city_name
+        global city_name, mail_info
+        mail_info = []
 
         try:
             with open('src/data_in.yaml','r') as file:
@@ -15,15 +16,29 @@ class Producer:
             print(e)
             exit()
 
-        if 'city' and 'api-key' and 'base-url' and 'temperature-threshold' and 'humidity-threshold' in data:
-            city_name = data['city'][0]
-            api_key = data['api-key'][0]
-            base_url = data['base-url'][0]
-            threshold_temperature = data['temperature-threshold'][0]
-            threshold_humidity = data['humidity-threshold'][0]
-        else:
-            print("Values not found in dictionary ...")
-            exit()
+        values = [
+                'city',
+                'api-key', 
+                'base-url', 
+                'temperature-threshold', 
+                'humidity-threshold', 
+                'mail-sender', 
+                'mail-password', 
+                'mail-receiver']
+        
+        for value in values:
+            if value not in value:
+                print(value + "not found ...")
+                exit()
+            
+        city_name = data['city'][0]
+        api_key = data['api-key'][0]
+        base_url = data['base-url'][0]
+        threshold_temperature = data['temperature-threshold'][0]
+        threshold_humidity = data['humidity-threshold'][0]
+        mail_info.append(data['mail-sender'][0])
+        mail_info.append(data['mail-password'][0])
+        mail_info.append(data['mail-receiver'][0])
 
         complete_url = base_url + "appid=" + api_key + "&q=" + city_name
         x = requests.get(complete_url).json()
@@ -74,5 +89,8 @@ class Producer:
 
     def getCity():
         return city_name
+    
+    def getMailInfo():
+        return mail_info
 
         
