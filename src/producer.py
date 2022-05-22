@@ -2,7 +2,7 @@ import requests
 from datetime import datetime
 import ast
 import yaml
-from log import Log
+from src import Log
 
 class Producer:
     def init():
@@ -21,14 +21,15 @@ class Producer:
             exit()
 
         values = [
-                'city',
-                'api-key', 
-                'base-url', 
-                'temperature-threshold', 
-                'humidity-threshold', 
-                'mail-sender', 
-                'mail-password', 
-                'mail-receiver']
+            'city',
+            'api-key', 
+            'base-url', 
+            'temperature-threshold', 
+            'humidity-threshold', 
+            'mail-sender', 
+            'mail-password', 
+            'mail-receiver'
+        ]
         
         for value in values:
             if value not in value:
