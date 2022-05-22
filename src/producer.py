@@ -34,7 +34,7 @@ class Producer:
         for value in values:
             if value not in value:
                 print(value + "not found ...")
-                Log.addMesage(value + "not found ...")
+                Log.addMesage("producer", value + "not found ...")
                 exit()
             
         city_name = data['city'][0]
@@ -87,13 +87,13 @@ class Producer:
 
             except Exception as e:
                 print(str(e))
-                Log.addMesage(e)
+                Log.addMesage("producer", e)
                 file = open("../data/weather_info_" + city_name + ".txt","w")
                 file.close()
                 exit()
         else:
             print("City not found!")
-            Log.addMesage("City not found!")
+            Log.addMesage("producer", "City not found!")
         
         Log.close()
 

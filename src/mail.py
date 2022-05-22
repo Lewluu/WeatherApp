@@ -34,10 +34,10 @@ class Mail:
             smtp_server.sendmail(mail_user, to, email_text)
             smtp_server.close()
             print ("Email sent!")
-            Log.addMesage("Email sent!")
+            Log.addMesage("mail-module", "Email sent!")
         except Exception as ex:
             print("Something went wrong….", ex)
-            Log.addMesage("Something went wrong….", ex)
+            Log.addMesage("mail-module", "Something went wrong….", ex)
         
         Log.close()
 

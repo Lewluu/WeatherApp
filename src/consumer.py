@@ -21,7 +21,7 @@ try:
     file.close()
 except Exception as e:
     print(e)
-    Log.addMesage(e)
+    Log.addMesage("consumer", e)
     exit()
 
 last_line = ast.literal_eval(data_file[len(data_file) - 1])
@@ -38,7 +38,7 @@ values = [
 for value in values:
     if value not in (first_line and last_line):
         print(value + " not found ...")
-        Log.addMesage(value + " not found ...")
+        Log.addMesage("consumer", value + " not found ...")
         exit()
 
 curr_temperature = float(last_line['temperature'])
@@ -66,5 +66,5 @@ if Mail.isNotEmpty():
 else:
     Log.init()
     print("Weather is normal!")
-    Log.addMesage("Weather is normal!")
+    Log.addMesage("consumer", "Weather is normal!")
     Log.close()
