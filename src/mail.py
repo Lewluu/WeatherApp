@@ -1,4 +1,5 @@
 import smtplib
+from src import Log
 
 class Mail:
     def init(sender, password, receiver):
@@ -16,6 +17,8 @@ class Mail:
         body += content + "\n"
 
     def send():
+        Log.init()
+
         email_text = """\
         From: %s
         To: %s
@@ -30,9 +33,13 @@ class Mail:
             smtp_server.login(mail_user, mail_password)
             smtp_server.sendmail(mail_user, to, email_text)
             smtp_server.close()
-            print ("Email sent successfully!")
+            print ("Email sent!")
+            Log.addMesage("Email sent!")
         except Exception as ex:
-            print ("Something went wrong….", ex)
+            print("Something went wrong….", ex)
+            Log.addMesage("Something went wrong….", ex)
+        
+        Log.close()
 
     def isNotEmpty():
         return len(body)

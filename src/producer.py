@@ -2,9 +2,12 @@ import requests
 from datetime import datetime
 import ast
 import yaml
+from log import Log
 
 class Producer:
     def init():
+        Log.init()
+
         global city_name, mail_info
         mail_info = []
 
@@ -14,6 +17,7 @@ class Producer:
                 file.close()
         except Exception as e:
             print(e)
+            Log.addMesage(e)
             exit()
 
         values = [
@@ -29,6 +33,7 @@ class Producer:
         for value in values:
             if value not in value:
                 print(value + "not found ...")
+                Log.addMesage(value + "not found ...")
                 exit()
             
         city_name = data['city'][0]
@@ -81,11 +86,15 @@ class Producer:
 
             except Exception as e:
                 print(str(e))
+                Log.addMesage(e)
                 file = open("../data/weather_info_" + city_name + ".txt","w")
                 file.close()
                 exit()
         else:
             print("City not found!")
+            Log.addMesage("City not found!")
+        
+        Log.close()
 
     def getCity():
         return city_name

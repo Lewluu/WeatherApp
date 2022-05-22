@@ -1,6 +1,9 @@
 import ast
 import sys
 from src import Mail
+from src import Log
+
+Log.init()
 
 city = sys.argv[1]
 mail_sender = sys.argv[2]
@@ -18,6 +21,7 @@ try:
     file.close()
 except Exception as e:
     print(e)
+    Log.addMesage(e)
     exit()
 
 last_line = ast.literal_eval(data_file[len(data_file) - 1])
@@ -34,6 +38,7 @@ values = [
 for value in values:
     if value not in (first_line and last_line):
         print(value + " not found ...")
+        Log.addMesage(value + " not found ...")
         exit()
 
 curr_temperature = float(last_line['temperature'])
@@ -52,8 +57,14 @@ if diff_temperature >= threshold_temperature:
 
 if diff_humidity >= threshold_humidity:
     Mail.addContent("Values in humidity exceeded by: " + diff_humidity)
-        
+
+#closing the log session before sending the mail, because the mail "send()" method has it's own log
+Log.close()
+
 if Mail.isNotEmpty():
     Mail.send()
 else:
+    Log.init()
     print("Weather is normal!")
+    Log.addMesage("Weather is normal!")
+    Log.close()
