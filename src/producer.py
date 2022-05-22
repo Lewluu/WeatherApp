@@ -9,7 +9,7 @@ class Producer:
         mail_info = []
 
         try:
-            with open('src/data_in.yaml','r') as file:
+            with open('../data/data_in.yaml','r') as file:
                 data = yaml.safe_load(file)
                 file.close()
         except Exception as e:
