@@ -6,8 +6,6 @@ from src import Log
 
 class Producer:
     def init():
-        Log.init()
-
         global city_name, mail_info
         mail_info = []
 
@@ -102,5 +100,4 @@ class Producer:
     
     def getMailInfo():
         return mail_info
-
         

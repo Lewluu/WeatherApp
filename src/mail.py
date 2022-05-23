@@ -17,8 +17,6 @@ class Mail:
         body += content + "\n"
 
     def send():
-        Log.init()
-
         email_text = """\
         From: %s
         To: %s
@@ -37,9 +35,7 @@ class Mail:
             Log.addMesage("mail-module", "Email sent!")
         except Exception as ex:
             print("Something went wrong….", ex)
-            Log.addMesage("mail-module", "Something went wrong….", ex)
-        
-        Log.close()
+            Log.addMesage("mail-module", "Something went wrong…" + str(ex))
 
     def isNotEmpty():
         return len(body)

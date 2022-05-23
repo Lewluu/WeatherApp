@@ -3,9 +3,9 @@ import os
 
 Producer.init()
 
-os.system("python src/consumer.py "
- + Producer.getCity() + " "
- + Producer.getMailInfo()[0] + " "
- + Producer.getMailInfo()[1] + " "
- + Producer.getMailInfo()[2]
- )
+# os.system("python src/consumer.py "
+#  + Producer.getCity() + " "
+#  + Producer.getMailInfo()[0] + " "
+#  + Producer.getMailInfo()[1] + " "
+#  + Producer.getMailInfo()[2]
+#  )

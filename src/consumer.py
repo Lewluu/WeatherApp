@@ -3,15 +3,14 @@ import sys
 from src import Mail
 from src import Log
 
-Log.init()
-
 city = sys.argv[1]
 mail_sender = sys.argv[2]
 mail_password = sys.argv[3]
 mail_receiver = sys.argv[4]
 
 path = "../data/weather_info_" + city + ".txt"
-Mail.init(mail_sender, mail_password, mail_password)
+
+Mail.init(mail_sender, mail_password, mail_receiver)
 
 #getting the first and last line from file
 data_file = list()
@@ -53,18 +52,13 @@ diff_temperature = abs(round(curr_temperature - one_hour_ago_temperature, 2))
 diff_humidity = abs(round(curr_humidity - one_hour_ago_humidity, 2))
 
 if diff_temperature >= threshold_temperature:
-    Mail.addContent("Values in temperature exceeded by: " + diff_temperature)
+    Mail.addContent("Values in temperature exceeded by: " + str(diff_temperature))
 
 if diff_humidity >= threshold_humidity:
-    Mail.addContent("Values in humidity exceeded by: " + diff_humidity)
-
-#closing the log session before sending the mail, because the mail "send()" method has it's own log
-Log.close()
+    Mail.addContent("Values in humidity exceeded by: " + str(diff_humidity))
 
 if Mail.isNotEmpty():
     Mail.send()
 else:
-    Log.init()
     print("Weather is normal!")
     Log.addMesage("consumer", "Weather is normal!")
-    Log.close()
