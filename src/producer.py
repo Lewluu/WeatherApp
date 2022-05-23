@@ -92,8 +92,6 @@ class Producer:
         else:
             print("City not found!")
             Log.addMesage("producer", "City not found!")
-        
-        Log.close()
 
     def getCity():
         return city_name
