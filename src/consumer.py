@@ -1,7 +1,6 @@
 import ast
 import sys
-from src import Mail
-from src import Log
+from src import Mail, Log
 
 city = sys.argv[1]
 mail_sender = sys.argv[2]
@@ -13,9 +12,9 @@ path = "../data/weather_info_" + city + ".txt"
 Mail.init(mail_sender, mail_password, mail_receiver)
 
 #getting the first and last line from file
-data_file = list()
 try:
     with open(path, 'r') as file:
+        data_file = list()
         for line in file: data_file.append(line)
     file.close()
 except Exception as e:

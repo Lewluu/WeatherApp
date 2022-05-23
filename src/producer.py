@@ -1,7 +1,7 @@
 import requests
-from datetime import datetime
 import ast
 import yaml
+from datetime import datetime
 from src import Log
 
 class Producer:
